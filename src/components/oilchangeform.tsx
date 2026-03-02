@@ -3,7 +3,7 @@ import { Card } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import { OilChange } from "./oilchangecard";
+import { OilChange } from "../types";
 
 interface OilChangeFormProps {
   onSubmit: (data: OilChange) => void;
