@@ -1,16 +1,7 @@
 import React from "react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-
-export interface OilChange {
-  id: string;
-  cliente: string;
-  vehiculo: string;
-  placa: string;
-  kilometraje: number;
-  fecha: string;
-  proximoCambio: number;
-}
+import { OilChange } from "../types";
 
 interface OilChangeCardProps {
   data: OilChange;
