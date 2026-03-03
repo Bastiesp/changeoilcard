@@ -6,4 +6,5 @@ export interface OilChange {
   kilometraje: number;
   fecha: string;
   proximoCambio: number;
+  completado: boolean; // Nuevo campo para marcar como realizado
 }
