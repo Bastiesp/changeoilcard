@@ -1,17 +1,15 @@
-import React from "react";
+import { OilChange } from "../types"; // IMPORTAR desde types
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import { OilChange } from "../types";
 
 interface OilChangeCardProps {
   data: OilChange;
   onDelete?: (id: string) => void;
 }
 
-export const OilChangeCard: React.FC<OilChangeCardProps> = ({
-  data,
-  onDelete,
-}) => {
+export const OilChangeCard: React.FC<OilChangeCardProps> = ({ data, onDelete }) => {
+  // ... resto del código igual
+};
   return (
     <Card className="w-full">
       <div className="flex justify-between items-start">
