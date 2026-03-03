@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { OilChangeCard } from "./components/oilchangecard";
+import { OilChange } from "./types"; // IMPORTANTE: desde types
 import { OilChangeForm } from "./components/oilchangeform";
-import { OilChangeCard, OilChange } from "./components/oilchangecard";
 import { getFromLocalStorage, saveToLocalStorage, calculateNextOilChange, formatDate } from "./lib/utils";
 
 export default function App() {
