@@ -12,8 +12,8 @@ interface OilChangeCardProps {
 export const OilChangeCard: React.FC<OilChangeCardProps> = ({ data, onDelete, onToggle }) => {
   return (
     <Card
-      id={`oilcard-${data.id}`}
       className={`w-full p-4 ${data.completado ? "bg-green-50" : "bg-white"}`}
+      id={`oilcard-${data.id}`}
     >
       <div className="flex justify-between items-center mb-2">
         <div>
@@ -35,7 +35,7 @@ export const OilChangeCard: React.FC<OilChangeCardProps> = ({ data, onDelete, on
       <div className="flex gap-2 mt-4">
         {onToggle && (
           <Button
-            variant={data.completado ? "secondary" : "success"}
+            variant={data.completado ? "secondary" : "primary"}
             className="flex-1"
             onClick={() => onToggle(data.id)}
           >
