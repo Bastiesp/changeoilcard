@@ -18,7 +18,6 @@ export const OilChangeCard: React.FC<OilChangeCardProps> = ({ data, onDelete, on
             ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-200"
             : "bg-white border-gray-200 hover:border-blue-300"
         }`}
-        id={`oilcard-${data.id}`}
       >
         <div className="space-y-4">
           <div className="flex justify-between items-start mb-4">
@@ -73,7 +72,7 @@ export const OilChangeCard: React.FC<OilChangeCardProps> = ({ data, onDelete, on
               className="flex-1"
               onClick={async () => {
                 try {
-                  await generatePDF(`oilcard-${data.id}`, `CambioAceite_${data.cliente}.pdf`);
+                  await generatePDF(`pdf-${data.id}`, `CambioAceite_${data.cliente}.pdf`);
                 } catch (err) {
                   console.error("Error al generar PDF:", err);
                 }
@@ -90,7 +89,7 @@ export const OilChangeCard: React.FC<OilChangeCardProps> = ({ data, onDelete, on
         </div>
       </Card>
 
-      <div id={`oilcard-${data.id}`} style={{ display: "none" }}>
+      <div id={`pdf-${data.id}`} style={{ display: "none" }}>
         <PDFCard data={data} />
       </div>
     </>
@@ -105,7 +104,6 @@ function PDFCard({ data }: { data: OilChange }) {
       backgroundColor: "#ffffff",
       padding: "20px",
       fontFamily: "Arial, sans-serif",
-      border: "2px solid #1e40af",
       boxSizing: "border-box",
       position: "relative",
       overflow: "hidden"
@@ -115,11 +113,11 @@ function PDFCard({ data }: { data: OilChange }) {
         top: 0,
         left: 0,
         right: 0,
-        height: "40px",
+        height: "35px",
         backgroundColor: "#1e40af",
         color: "white",
         padding: "8px 20px",
-        fontSize: "20px",
+        fontSize: "18px",
         fontWeight: "bold",
         display: "flex",
         alignItems: "center",
@@ -128,88 +126,106 @@ function PDFCard({ data }: { data: OilChange }) {
         Bgarage
       </div>
 
-      <div style={{ marginTop: "50px" }}>
-        <div style={{ marginBottom: "16px", borderBottom: "2px solid #e5e7eb", paddingBottom: "8px" }}>
-          <div style={{ fontSize: "24px", fontWeight: "bold", color: "#111827" }}>
-            {data.cliente}
+      <div style={{ marginTop: "45px", paddingBottom: "80px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+          <span style={{ fontSize: "28px" }}>🚗</span>
+          <div>
+            <div style={{ fontSize: "20px", fontWeight: "bold", color: "#111827" }}>
+              {data.cliente}
+            </div>
+            <div style={{ fontSize: "11px", color: "#6b7280" }}>
+              {data.vehiculo}
+            </div>
           </div>
-          <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>
-            {data.vehiculo}
+          <span style={{ fontSize: "28px", marginLeft: "auto" }}>🛢️</span>
+        </div>
+
+        <div style={{
+          backgroundColor: "#ffffff",
+          padding: "14px",
+          borderRadius: "8px",
+          marginBottom: "14px",
+          border: "3px solid #000000",
+          textAlign: "center"
+        }}>
+          <div style={{ fontSize: "10px", color: "#6b7280", fontWeight: "bold", marginBottom: "6px" }}>
+            PLACA
+          </div>
+          <div style={{ fontSize: "32px", fontWeight: "bold", color: "#000000", letterSpacing: "3px" }}>
+            {data.placa}
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" }}>
-          <div style={{ backgroundColor: "#f3f4f6", padding: "12px", borderRadius: "6px" }}>
-            <div style={{ fontSize: "10px", color: "#6b7280", fontWeight: "bold", marginBottom: "4px" }}>
-              PLACA
-            </div>
-            <div style={{ fontSize: "16px", fontWeight: "bold", color: "#1e40af" }}>
-              {data.placa}
-            </div>
-          </div>
-          <div style={{ backgroundColor: "#f3f4f6", padding: "12px", borderRadius: "6px" }}>
-            <div style={{ fontSize: "10px", color: "#6b7280", fontWeight: "bold", marginBottom: "4px" }}>
-              FECHA
-            </div>
-            <div style={{ fontSize: "14px", fontWeight: "bold", color: "#374151" }}>
-              {data.fecha}
-            </div>
-          </div>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" }}>
-          <div style={{ backgroundColor: "#dbeafe", padding: "12px", borderRadius: "6px", border: "2px solid #1e40af" }}>
-            <div style={{ fontSize: "10px", color: "#1e40af", fontWeight: "bold", marginBottom: "4px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
+          <div style={{ backgroundColor: "#f3f4f6", padding: "10px", borderRadius: "4px" }}>
+            <div style={{ fontSize: "9px", color: "#6b7280", fontWeight: "bold", marginBottom: "3px" }}>
               KM ACTUAL
             </div>
-            <div style={{ fontSize: "18px", fontWeight: "bold", color: "#1e40af" }}>
+            <div style={{ fontSize: "14px", fontWeight: "bold", color: "#000" }}>
               {data.kilometraje} km
             </div>
           </div>
-          <div style={{ backgroundColor: "#dbeafe", padding: "12px", borderRadius: "6px", border: "2px solid #1e40af" }}>
-            <div style={{ fontSize: "10px", color: "#1e40af", fontWeight: "bold", marginBottom: "4px" }}>
-              PRÓXIMO CAMBIO
+          <div style={{ backgroundColor: "#f3f4f6", padding: "10px", borderRadius: "4px" }}>
+            <div style={{ fontSize: "9px", color: "#6b7280", fontWeight: "bold", marginBottom: "3px" }}>
+              PRÓXIMO
             </div>
-            <div style={{ fontSize: "18px", fontWeight: "bold", color: "#1e40af" }}>
+            <div style={{ fontSize: "14px", fontWeight: "bold", color: "#000" }}>
               {data.proximoCambio} km
             </div>
           </div>
         </div>
 
-        <div style={{ backgroundColor: "#fef3c7", padding: "12px", borderRadius: "6px", marginBottom: "16px", border: "1px solid #fbbf24" }}>
-          <div style={{ fontSize: "10px", color: "#92400e", fontWeight: "bold", marginBottom: "4px" }}>
-            ACEITE UTILIZADO
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
+          <div style={{ backgroundColor: "#dbeafe", padding: "10px", borderRadius: "4px", border: "1px solid #1e40af" }}>
+            <div style={{ fontSize: "9px", color: "#1e40af", fontWeight: "bold", marginBottom: "3px" }}>
+              FECHA
+            </div>
+            <div style={{ fontSize: "12px", fontWeight: "bold", color: "#000" }}>
+              {data.fecha}
+            </div>
           </div>
-          <div style={{ fontSize: "14px", fontWeight: "bold", color: "#333333" }}>
-            {data.aceiteUsado}
+          <div style={{ backgroundColor: "#fef3c7", padding: "10px", borderRadius: "4px", border: "1px solid #fbbf24" }}>
+            <div style={{ fontSize: "9px", color: "#92400e", fontWeight: "bold", marginBottom: "3px" }}>
+              ACEITE
+            </div>
+            <div style={{ fontSize: "11px", fontWeight: "bold", color: "#000" }}>
+              {data.aceiteUsado}
+            </div>
           </div>
         </div>
 
         <div style={{
           backgroundColor: data.completado ? "#d1fae5" : "#fef3c7",
-          padding: "12px",
-          borderRadius: "6px",
+          padding: "10px",
+          borderRadius: "4px",
           textAlign: "center",
           fontWeight: "bold",
           color: data.completado ? "#065f46" : "#92400e",
-          border: `2px solid ${data.completado ? "#10b981" : "#fbbf24"}`
+          border: `1px solid ${data.completado ? "#10b981" : "#fbbf24"}`,
+          fontSize: "11px"
         }}>
-          {data.completado ? "✓ MANTENIMIENTO REALIZADO" : "⏳ PENDIENTE DE REALIZAR"}
+          {data.completado ? "✓ REALIZADO" : "⏳ PENDIENTE"}
         </div>
       </div>
 
       <div style={{
         position: "absolute",
-        bottom: "10px",
+        bottom: "8px",
         left: "20px",
         right: "20px",
-        fontSize: "10px",
-        color: "#9ca3af",
         textAlign: "center",
-        borderTop: "1px solid #e5e7eb",
-        paddingTop: "8px"
+        borderTop: "2px solid #1e40af",
+        paddingTop: "8px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "8px"
       }}>
-        Documento generado por Bgarage - Sistema de Mantenimiento Automotriz
+        <span style={{ fontSize: "18px" }}>🔧</span>
+        <div style={{ fontSize: "13px", fontWeight: "bold", color: "#1e40af" }}>
+          BGARAGE
+        </div>
+        <span style={{ fontSize: "18px" }}>⚙️</span>
       </div>
     </div>
   );
