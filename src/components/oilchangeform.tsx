@@ -1,119 +1,31 @@
-import React, { useState } from "react";
-import { Card } from "./ui/card";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { useState } from "react";
 import { Button } from "./ui/button";
-import { OilChange } from "../types";
+import { Input } from "./ui/input";
 
 interface OilChangeFormProps {
-  onSubmit: (data: OilChange) => void;
+  onSubmit: (data: { cliente: string; vehiculo: string; placa: string; kilometraje: number }) => void;
 }
 
-export const OilChangeForm: React.FC<OilChangeFormProps> = ({
-  onSubmit,
-}) => {
-  const [formData, setFormData] = useState({
-    cliente: "",
-    vehiculo: "",
-    placa: "",
-    kilometraje: "",
-    proximoCambio: "",
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+export const OilChangeForm: React.FC<OilChangeFormProps> = ({ onSubmit }) => {
+  const [cliente, setCliente] = useState("");
+  const [vehiculo, setVehiculo] = useState("");
+  const [placa, setPlaca] = useState("");
+  const [kilometraje, setKilometraje] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const newOilChange: OilChange = {
-      id: crypto.randomUUID(),
-      cliente: formData.cliente,
-      vehiculo: formData.vehiculo,
-      placa: formData.placa,
-      kilometraje: Number(formData.kilometraje),
-      fecha: new Date().toLocaleDateString(),
-      proximoCambio: Number(formData.proximoCambio),
-    };
-
-    onSubmit(newOilChange);
-
-    setFormData({
-      cliente: "",
-      vehiculo: "",
-      placa: "",
-      kilometraje: "",
-      proximoCambio: "",
-    });
+    if (!cliente || !vehiculo || !placa || !kilometraje) return;
+    onSubmit({ cliente, vehiculo, placa, kilometraje: Number(kilometraje) });
+    setCliente(""); setVehiculo(""); setPlaca(""); setKilometraje("");
   };
 
   return (
-    <Card className="w-full max-w-md">
-      <h2 className="text-xl font-semibold mb-4">
-        Registrar Cambio de Aceite
-      </h2>
-
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="cliente">Cliente</Label>
-          <Input
-            name="cliente"
-            value={formData.cliente}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="vehiculo">Vehículo</Label>
-          <Input
-            name="vehiculo"
-            value={formData.vehiculo}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="placa">Placa</Label>
-          <Input
-            name="placa"
-            value={formData.placa}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="kilometraje">Kilometraje Actual</Label>
-          <Input
-            type="number"
-            name="kilometraje"
-            value={formData.kilometraje}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="proximoCambio">Próximo Cambio (km)</Label>
-          <Input
-            type="number"
-            name="proximoCambio"
-            value={formData.proximoCambio}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <Button type="submit" className="w-full">
-          Guardar
-        </Button>
-      </form>
-    </Card>
+    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded shadow">
+      <Input placeholder="Cliente" value={cliente} onChange={e => setCliente(e.target.value)} />
+      <Input placeholder="Vehículo" value={vehiculo} onChange={e => setVehiculo(e.target.value)} />
+      <Input placeholder="Patente" value={placa} onChange={e => setPlaca(e.target.value)} />
+      <Input placeholder="Kilometraje" type="number" value={kilometraje} onChange={e => setKilometraje(e.target.value)} />
+      <Button type="submit" className="w-full">Agregar Cambio</Button>
+    </form>
   );
 };
