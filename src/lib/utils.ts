@@ -1,9 +1,10 @@
+// src/lib/utils.ts
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-/** --------------------------------
+/** -------------------------------
  * LocalStorage Helpers
- * -------------------------------- */
+ * ------------------------------- */
 export function saveToLocalStorage(key: string, value: any) {
   localStorage.setItem(key, JSON.stringify(value));
 }
@@ -13,13 +14,9 @@ export function getFromLocalStorage<T>(key: string): T | null {
   return item ? (JSON.parse(item) as T) : null;
 }
 
-/** --------------------------------
+/** -------------------------------
  * Date / Oil Change Helpers
- * -------------------------------- */
-
-/**
- * Formatea la fecha actual a DD/MM/YYYY
- */
+ * ------------------------------- */
 export function formatDate(): string {
   const date = new Date();
   const day = date.getDate().toString().padStart(2, '0');
@@ -28,15 +25,14 @@ export function formatDate(): string {
   return `${day}/${month}/${year}`;
 }
 
-/**
- * Calcula el próximo cambio de aceite en km
- * @param currentKm - kilometraje actual
- */
 export function calculateNextOilChange(currentKm: number): number {
-  const INTERVAL_KM = 5000; // cada 5000 km
+  const INTERVAL_KM = 5000;
   return currentKm + INTERVAL_KM;
 }
 
+/** -------------------------------
+ * PDF / HTML Helpers
+ * ------------------------------- */
 export async function generatePDF(elementId: string, fileName: string) {
   const element = document.getElementById(elementId);
   if (!element) throw new Error(`No se encontró el elemento con id "${elementId}"`);
