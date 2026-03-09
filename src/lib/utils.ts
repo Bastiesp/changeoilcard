@@ -26,7 +26,7 @@ export function formatDate(): string {
 }
 
 export function calculateNextOilChange(currentKm: number): number {
-  const INTERVAL_KM = 5000;
+  const INTERVAL_KM = 10000;
   return currentKm + INTERVAL_KM;
 }
 

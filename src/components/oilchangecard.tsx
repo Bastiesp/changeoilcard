@@ -128,7 +128,7 @@ function PDFCard({ data }: { data: OilChange }) {
 
       <div style={{ marginTop: "45px", paddingBottom: "80px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-          <span style={{ fontSize: "28px" }}>🚗</span>
+          <span style={{ fontSize: "28px", filter: "brightness(1.5)" }}>🚗</span>
           <div>
             <div style={{ fontSize: "20px", fontWeight: "bold", color: "#111827" }}>
               {data.cliente}
@@ -137,7 +137,7 @@ function PDFCard({ data }: { data: OilChange }) {
               {data.vehiculo}
             </div>
           </div>
-          <span style={{ fontSize: "28px", marginLeft: "auto" }}>🛢️</span>
+          <span style={{ fontSize: "28px", marginLeft: "auto" }}>🛢</span>
         </div>
 
         <div style={{
